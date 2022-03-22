@@ -50,7 +50,6 @@
                                             <div class="timeline-header">
                                                 <span class="userimage"><img src="{{asset($post->user['avatar'])}}" alt=""></span>
                                                 <span class="username"><a href="{{ asset('profiles/student/'.$post->user->id)}}">{{ $post->user->name}} {{$post->user->surname}}</a> <small></small></span>
-                                                <span class="pull-right text-muted">3500 Views</span>
                                             </div>
                                             <div class="timeline-content">
                                                 <p class="post-content">
@@ -58,7 +57,7 @@
                                                 </p>
                                                 <div class="row">
                                                     @foreach(json_decode($post->images) as $key)
-                                                        <img  data-lightbox="roadtrip" style="width: 150px" src="{{ asset($key) }}" alt="">
+                                                        <img  data-lightbox="roadtrip" class="post-img" src="{{ asset($key) }}" alt="">
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -95,7 +94,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 @foreach(json_decode($key->images) as $key)
-                                                                    <img data-lightbox="mygallery" style="width: 150px" src="{{ asset($key) }}" alt="">
+                                                                    <img  style="width: 150px" src="{{ asset($key) }}" alt="">
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -112,7 +111,7 @@
                                                                 </i>
                                                             </div>
                                                             <span class="input-group-btn p-l-10">
-                                          <button class="btn btn-primary f-s-12 rounded-corner" type="submit">Comment</button>
+                                          <button class="btn btn-primary f-s-12 rounded-corner" type="submit"> Comment <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                                           </span>
                                                         </div>
                                                     </form>

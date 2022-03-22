@@ -23,6 +23,7 @@
             </div>
         @endif
 
+
         <table class="table table-dark table-hover">
             <tr>
                 <td>Name</td>

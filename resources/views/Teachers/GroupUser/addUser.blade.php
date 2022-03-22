@@ -15,9 +15,13 @@
             <button class="btn btn-success" id="add-lesson">Add</button>
 
         </form>
-        @foreach($groups as $key)
-            <a href="/groupUsers/search/{{ $key->id }}">{{ $key->name }}</a>
-        @endforeach
+        <ul class="student lessons">
+            @foreach($groups as $key)
+                <li class="student-item lessons-item">
+                    <a href="/groupUsers/search/{{ $key->id }}">{{ $key->name }}</a>
+                </li>
+            @endforeach
+        </ul>
         <table class="table table-dark">
             <tr>
                 <th>ID</th>

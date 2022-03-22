@@ -12,10 +12,21 @@
                 @endforeach
             </select>
         </div>
-        <button class="btn btn-success" id="add-lesson">Add</button>
-        @foreach($groups as $key)
-            <a href="/lesson/search/{{ $key->id }}">{{ $key->name }}</a>
-        @endforeach
+        <button class="btn btn-success add-lesson" id="add-lesson">Add</button>
+
+
+
+
+        <ul class="lessons">
+            @foreach($groups as $key)
+
+                <li class="lessons-item">
+                    <a href="/lesson/search/{{ $key->id }}">{{ $key->name }}</a>
+                </li>
+            @endforeach
+        </ul>
+
+
 
         @if ($errors->any())
             <div class="alert alert-danger">
