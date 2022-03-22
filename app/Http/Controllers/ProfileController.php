@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('.Profiles.profile',compact('user'));
+        return view('.Profiles.profile', compact('user'));
     }
 
     /**
@@ -32,16 +32,16 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $user=User::all();
+        $user = User::all();
         $file = $request->file('avatar');
-        $name = time().rand(11111, 99999) . '.' . $file->getClientOriginalExtension();
+        $name = time() . rand(11111, 99999) . '.' . $file->getClientOriginalExtension();
         $request->file('avatar')->move("avatar", $name);
-        $user->img = 'images/'.$name;
+        $user->img = 'images/' . $name;
 
 
     }
@@ -49,71 +49,73 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-      $user = User::with('posts.comments.user')->find($id);
-      return view('.Profiles.page',compact('user'));
+        $user = User::with('posts.comments.user')->find($id);
+        return view('.Profiles.page', compact('user'));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $user = User::find($id);
-        return view('/Profiles/editProfile',compact('user'));
+        return view('/Profiles/editProfile', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @param int $id
      * @return string
      * @return integer
      */
     public function update(Request $request, $id)
     {
-        $name='';
+        $name = '';
         if ($request->hasFile('avatar')) {
-            if($request->file('avatar')->isValid()) {
+            if ($request->file('avatar')->isValid()) {
                 try {
                     $file = $request->file('avatar');
                     $name = rand(11111, 99999) . '.' . $file->getClientOriginalExtension();
                     $request->file('avatar')->move("avatars", $name);
-                    User::where('id',$id)->update([
-                        'avatar'=>'avatars/'.$name,
+                    User::where('id', $id)->update([
+                        'avatar' => 'avatars/' . $name,
                     ]);
                 } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
                 }
             }
         }
-        User::where('id',$id)->update([
-            'name'=>$request->name,
-            'surname'=>$request->surname,
-            'phone'=>$request->phone,
-            'country'=>$request->country,
-            'state'=>$request->state,
+        User::where('id', $id)->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'phone' => $request->phone,
+            'country' => $request->country,
+            'state' => $request->state,
         ]);
-        return redirect('/profiles/student/'.$id) ;
+        return redirect('/profiles/student/' . $id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+
+
     }
 }
+

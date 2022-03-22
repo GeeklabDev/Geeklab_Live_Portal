@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix('profiles')->group(function(){
         Route::get('/student/{id}','ProfileController@show');
         Route::get('/edit/','ProfileController@index');
+        Route::post('/delete/picture/{id}','ProfileController@destroy');
         Route::post('/update/{id}','ProfileController@update');
 
     });

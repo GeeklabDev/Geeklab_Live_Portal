@@ -4,7 +4,7 @@
         <form action="/profiles/update/{{ Auth::id()}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-md-3 border-right avatar-image">
+                <div name="photo" class="col-md-3 border-right avatar-image">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         @if(\Illuminate\Support\Facades\Auth::user()['avatar']=='')
                             <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
@@ -37,6 +37,16 @@
                 </div>
             </div>
         </form>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <form action="/delete/picture/{{Auth::id()}}" method="GET">
+            <button class="btn btn-danger">Delete Profile picture</button>
+        </form>
+
+
     </div>
     </div>
 @endsection
