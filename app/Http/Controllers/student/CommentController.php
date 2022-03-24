@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(PostRequest $request, $id)
     {
         $image=[];
         date_default_timezone_set('Asia/Yerevan');
@@ -104,6 +105,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::where('id', $id)->delete();
+        return redirect()->back();
     }
 }

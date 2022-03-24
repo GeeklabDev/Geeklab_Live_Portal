@@ -4,12 +4,12 @@
         <form action="/profiles/update/{{ Auth::id()}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div name="photo" class="col-md-3 border-right avatar-image">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <div name="photo" class="user-image col-md-3 border-right avatar-image">
+                    <div class="user-image d-flex flex-column align-items-center text-center p-3 py-5">
                         @if(\Illuminate\Support\Facades\Auth::user()['avatar']=='')
-                            <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            <img class="mt-5"  src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                         @else
-                            <img class="rounded-circle mt-5" width="150px" src="{{asset(Auth::user()->avatar)}}">
+                            <img class="mt-5"  src="{{asset(Auth::user()->avatar)}}">
                         @endif
                         <span class="font-weight-bold">{{Auth::user()->name}} </span><span class="text-black-50">{{Auth::user()->email}}</span><span>
                         </span>

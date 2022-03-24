@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/posts','student\PostController@index');
         Route::post('/posts/add','student\PostController@store');
         Route::post('/comment/add/{id}','student\CommentController@store');
+        Route::get('/delete/comment/{id}','student\CommentController@destroy');
+
 
 
     });

@@ -736,10 +736,29 @@ select.form-control:not([size]):not([multiple]) {
 .comment-parent{
     word-break: break-all;
 }
+.item-comment>a{
+    width: 10%;
+}
 .item-comment{
     position: relative;
-    width: 50%;
-
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+.item-comment:hover .delete-comment-parent>a{
+    display: block;
+}
+.delete-comment-parent{
+    width: 20%;
+    margin-left: 31px;
+    margin-bottom: 14px;
+}
+.delete-comment-parent>a{
+    display: none;
+}
+.item-comment-child{
+    display: flex;
+    align-items: center;
 }
 .post-content{
     font-size: 20px;
@@ -903,6 +922,17 @@ select.form-control:not([size]):not([multiple]) {
 .post-img img{
     width: 100%;
     height: 100%;
+}
+.add-comment-group{
+    display: none;
+
+}
+.user-image{
+}
+.user-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 

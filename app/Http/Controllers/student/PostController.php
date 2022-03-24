@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddPostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddPostRequest $request)
     {
         $image=[];
         date_default_timezone_set('Asia/Yerevan');

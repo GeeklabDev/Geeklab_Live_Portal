@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="timeline-content">
                                                 <p class="post-content">
-                                                    {{ $post->content }}
+                 f                                   {{ $post->content }}
                                                 </p>
                                                 <div class="row">
                                                     @foreach(json_decode($post->images) as $key)
@@ -82,20 +82,34 @@
                                                 @endif
                                                 <a href="javascript:;" class="m-lg-2 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
                                             </div>
-                                            <div class="timeline-comment-box">
+
+                                            <div class="add-comment-group">
+                                                 <div class="timeline-comment-box">
                                                 <div class="comments">
                                                     @foreach($post->comments as $key)
+
                                                         <div class="item-comment">
-                                                            <div class="image-avatar">
-                                                                <a href="/profiles/student/{{$key['user']['id']}}">  <h6>{{ $key->user->name }} {{$key->user->surname}}</h6></a>
-                                                            </div>
-                                                            <div class="comment-parent">
-                                                              <p> {{ $key->comment }}</p>
-                                                            </div>
-                                                            <div class="row">
-                                                                @foreach(json_decode($key->images) as $key)
-                                                                    <img  style="width: 150px" src="{{ asset($key) }}" alt="">
-                                                                @endforeach
+
+                                                                <div class="image-avatar">
+                                                                    <a href="/profiles/student/{{$key['user']['id']}}">
+                                                                        <h6>{{ $key->user->name }} {{$key->user->surname}}</h6>
+                                                                    </a>
+                                                                </div>
+                                                            <div class="item-comment-child">
+                                                                <div class="comment-parent">
+                                                                    <p>  {{ $key->comment }}</p>
+                                                                </div>
+                                                                <div class="row">
+                                                                    @foreach(json_decode($key->images) as $key)
+                                                                        <img style="width: 150px"
+                                                                             src="{{ asset($key) }}" alt="">
+                                                                    @endforeach
+                                                                </div>
+                                                                @if(Auth::id()==$key['user_id'])
+                                                                    <div class="delete-comment-parent">
+                                                                        <a href="/student/delete/comment/{{$key->id}}"><i class="fa fa-trash"></i></a>
+                                                                    </div>
+                                                                    @endif
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -107,7 +121,7 @@
                                                             <input type="text" class="form-control rounded-corner" name="comment" placeholder="Write a comment...">
                                                             <div class="comment-file">
                                                                 <i class="fa fa-file" aria-hidden="true">
-                                                                    <input type="file" multiple name="files[]" class="choose-photo">
+                                                                    <input  type="file" multiple name="files[]" class="choose-photo">
                                                                 </i>
                                                             </div>
                                                             <span class="input-group-btn p-l-10">
@@ -116,6 +130,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </li>
