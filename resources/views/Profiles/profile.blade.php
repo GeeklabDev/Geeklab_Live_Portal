@@ -4,18 +4,39 @@
         <form action="/profiles/update/{{ Auth::id()}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div name="photo" class="user-image col-md-3 border-right avatar-image">
-                    <div class="user-image d-flex flex-column align-items-center text-center p-3 py-5">
-                        @if(\Illuminate\Support\Facades\Auth::user()['avatar']=='')
-                            <img class="mt-5"  src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                        @else
-                            <img class="mt-5"  src="{{asset(Auth::user()->avatar)}}">
-                        @endif
-                        <span class="font-weight-bold">{{Auth::user()->name}} </span><span class="text-black-50">{{Auth::user()->email}}</span><span>
-                        </span>
-                        <input type="file" name="avatar" title="Change photo">
+
+                <div name="photo" class="photo col-md-3">
+
+                    <div class="user-image">
+
+                        <div class="user-image-parent">
+                            <div class="choose-user-file">
+                                <input type="file" name="avatar" title="Change photo">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </div>
+                            @if(\Illuminate\Support\Facades\Auth::user()['avatar']=='')
+
+                                <img
+                                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+
+                            @else
+                                <img src="{{asset(Auth::user()->avatar)}}">
+                            @endif
+
+                        </div>
+
                     </div>
+
+                    <div class="info-user">
+                        <span class="font-weight-bold">{{Auth::user()->name}}</span>
+                        <span class="text-black-50">{{Auth::user()->email}}</span>
+
+                    </div>
+
+
                 </div>
+
+
                 <div class="col-md-5 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">

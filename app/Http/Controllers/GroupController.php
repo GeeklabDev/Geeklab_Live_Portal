@@ -39,11 +39,8 @@ class GroupController extends Controller
      */
     public function store(GroupRequest $request)
     {
-        $group = new Group();
-        $group->name = $request->name;
-        $group->user_id = Auth::id();
-        $group->save();
-        return redirect()->back();
+
+//        return redirect()->back();
 
     }
 
