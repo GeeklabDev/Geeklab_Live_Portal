@@ -55,7 +55,7 @@ a{
 }
 
 .profile-header .profile-header-cover {
-    background-image: url(https://bootdey.com/img/Content/bg1.jpg);
+   /* background-image: url(https://bootdey.com/img/Content/bg1.jpg);*/
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -73,7 +73,7 @@ a{
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .75) 100%)
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgb(40, 1, 1) 100%)
 }
 
 .profile-header .profile-header-content {
@@ -778,11 +778,11 @@ select.form-control:not([size]):not([multiple]) {
 .profile-avatar{
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 50%;
     overflow: hidden;
-    border:3px solid white;
+    border: 3px solid white;
 }
-.profile-avatar img{
+.profile-avatar>img{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -819,6 +819,10 @@ select.form-control:not([size]):not([multiple]) {
     align-items: center;
     justify-content: center;
     width: 70%;
+
+}
+.comment-input{
+    border-radius: 50px;
 
 }
 .form-control{
@@ -996,26 +1000,6 @@ select.form-control:not([size]):not([multiple]) {
     display: block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .modal{
     background: none;
     left: 50%;
@@ -1034,3 +1018,56 @@ select.form-control:not([size]):not([multiple]) {
     height: 40px;
     border-radius: 50%;
 }
+.post-user-info{
+    display: flex;
+    justify-content: space-between;
+    width: max-content;
+    align-items: center;
+}
+.post-user-image{
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.post-user-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.post-user-info span{
+    font-weight: bold;
+}
+.stats{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

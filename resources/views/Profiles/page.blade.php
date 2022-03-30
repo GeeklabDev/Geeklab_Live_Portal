@@ -88,9 +88,16 @@
                                                         </div>
 
                                                     @else
-                                                        <div class="avatar-parent">
-                                                          <img  src="{{asset(Auth::user()->avatar)}}">
+                                                    <!--Avatar-->
+                                                        <div class="post-user-image">
+                                                            @if(\Illuminate\Support\Facades\Auth::user()['avatar']=='')
+                                                                <img
+                                                                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                                                            @else
+                                                                <img src="{{asset(Auth::user()->avatar)}}">
+                                                            @endif
                                                         </div>
+                                                        <!--Avatar-->
 
                                                     @endif
                                                     <span class="username"><a
@@ -107,58 +114,71 @@
                                             </div>
                                             <div class="timeline-likes">
                                                 <div class="stats-right">
-                                                    <span class="stats-text">21 Comments</span>
+                                                    <span class="stats-text" >{{ $post->number_of_comments() }} Comments</span>
                                                 </div>
                                                 <div class="stats">
-                                    <span class="fa-stack fa-fw stats-icon">
-                                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                    <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
-                                    </span>
+                                                    <div class="stats">
                                                     <span class="fa-stack fa-fw stats-icon">
-                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                    <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                                    <span class="stats-total">4.3k</span>
+                                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                        <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+                                                      </span>
+                                                        <span class="stats-total">{{ $post->number_of_likes() }}</span>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
-                                            <div class="timeline-footer">
-                                                <a href="#" class="m-lg-2 text-inverse-lighter"><i
-                                                        class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
-                                                <a href="#" class="m-lg-2 text-inverse-lighter"><i
-                                                        class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+                                    <div class="timeline-footer">
+                                                <!--like start-->
+                                                @if($post->check_like()==0)
+                                                    <a href="/like/add/{{ $post->id }}#post-{{ $post->id }}" class="m-lg-2 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+                                                @else
+                                                    <a href="/like/dislike/{{ $post->id }}#post-{{ $post->id }}" class="m-lg-2 text-inverse-lighter "><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3 dislike-color"></i>Like</a>
+                                            @endif
+                                                <a  class="m-lg-2 text-inverse-lighter show-comment"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+
+                                                <!--like end-->
                                             </div>
                                             <div class="timeline-comment-box">
                                                 <div class="comments">
+                                                    <!--Comment Start-->
                                                     @foreach($post->comments as $key)
                                                         <div class="item-comment">
                                                             <div class="image-avatar">
-                                                                <a href="/profiles/student/{{$key['user']['id']}}">  <h6>{{ $key->user->name }} {{$key->user->surname}}</h6></a>
+                                                                <a href="/profiles/student/{{$key['user']['id']}}">
+                                                                    <h6>{{ $key->user->name }} {{$key->user->surname}}</h6>
+                                                                </a>
                                                             </div>
-                                                            <div class="comment-parent">
-                                                                <p> {{ $key->comment }}</p>
-                                                            </div>
-                                                            <div class="row">
-                                                                @foreach(json_decode($key->images) as $key)
-                                                                    <img style="width: 150px" src="{{ asset($key) }}" alt="">
-                                                                @endforeach
+                                                            <div class="item-comment-child">
+                                                                <div class="comment-parent">
+                                                                    <p>  {{ $key->comment }}</p>
+                                                                </div>
+                                                                <div class="row">
+                                                                    @foreach(json_decode($key->images) as $key)
+                                                                        <img style="width: 150px" src="{{ asset($key) }}" alt="">
+                                                                    @endforeach
+                                                                </div>
+                                                                @if(Auth::id()==$key['user_id'])
+                                                                    <div class="delete-comment-parent">
+                                                                        <a href="/student/delete/comment/{{$key->id}}"><i class="fa fa-trash"></i></a>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 </div>
-                                                <div class="user"><img
-                                                        src="https://bootdey.com/img/Content/avatar/avatar3.png">
-                                                </div>
+                                                <!--Comment end-->
                                                 <div class="input">
                                                     <form action="/student/comment/add/{{ $post->id }}" enctype="multipart/form-data" method="POST">
                                                         @csrf
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control rounded-corner" placeholder="Write a comment..." name="comment">
+                                                            <input type="text" class="form-control rounded-corner comment-input" placeholder="Write a comment..." name="comment">
                                                             <div class="comment-file">
                                                                 <i class="fa fa-file" aria-hidden="true">
                                                                     <input type="file" multiple name="files[]" class="choose-photo">
                                                                 </i>
                                                             </div>
-                                                            <span class="input-group-btn p-l-10">
+
                                                           <button class="btn btn-primary f-s-12 rounded-corner" type="submit">Comment</button>
 
                                                         </div>

@@ -54,7 +54,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = User::with('posts.comments.user')->find($id);
+        $user = User::with('posts.comments.user',)->orderBy('id','desc')->find($id);
         return view('.Profiles.page', compact('user'));
 
     }

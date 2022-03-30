@@ -41,22 +41,25 @@
                                         </div>
                                         <!-- end timeline-time -->
                                         <!-- begin timeline-icon -->
-                                        <div class="timeline-icon">
+<!--                                        <div class="timeline-icon">
                                             <a href="javascript:;">&nbsp;</a>
-                                        </div>
+                                        </div>-->
+
                                         <!-- end timeline-icon -->
                                         <!-- begin timeline-body -->
                                         <div class="timeline-body">
-                                            <div class="timeline-header">
-                                                <div class="avatar-image">
+
+                                            <div class="post-user-info">
+                                                <!--Avatar-->
+                                                <div class="post-user-image">
                                                     @if(\Illuminate\Support\Facades\Auth::user()['avatar']=='')
                                                         <img
                                                             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                                                     @else
                                                         <img src="{{asset(Auth::user()->avatar)}}">
                                                     @endif
-
                                                 </div>
+                                                <!--Avatar-->
                                                 <span class="username"><a href="{{ asset('profiles/student/'.$post->user->id)}}">{{ $post->user->name}} {{$post->user->surname}}</a> <small></small></span>
                                             </div>
                                             <div class="timeline-content">
@@ -65,46 +68,41 @@
                                                 </p>
                                                 <div class="row">
                                                     @foreach(json_decode($post->images) as $key)
-                                                        <img data-lightbox="roadtrip" class="post-img"
-                                                             src="{{ asset($key) }}" alt="">
+                                                        <img  class="post-img" src="{{ asset($key) }}" alt="">
                                                     @endforeach
                                                 </div>
                                             </div>
                                             <div class="timeline-likes">
+
                                                 <div class="stats-right">
-                                                    <span
-                                                        class="stats-text">{{ $post->number_of_comments() }} Comments</span>
+                                                    <span class="stats-text">{{ $post->number_of_comments() }} Comments</span>
                                                 </div>
+
                                                 <div class="stats">
                                                     <span class="fa-stack fa-fw stats-icon">
-                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                    <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                                    </span>
+                                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                        <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+                                                      </span>
                                                     <span class="stats-total">{{ $post->number_of_likes() }}</span>
                                                 </div>
                                             </div>
                                             <div class="timeline-footer">
-
+                                          <!--like start-->
                                                 @if($post->check_like()==0)
-                                                    <a href="/like/add/{{ $post->id }}#post-{{ $post->id }}"
-                                                       class="m-lg-2 text-inverse-lighter"><i
-                                                            class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+                                                    <a href="/like/add/{{ $post->id }}#post-{{ $post->id }}" class="m-lg-2 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
                                                 @else
-                                                    <a href="/like/dislike/{{ $post->id }}#post-{{ $post->id }}"
-                                                       class="m-lg-2 text-inverse-lighter "><i
-                                                            class="fa fa-thumbs-up fa-fw fa-lg m-r-3 dislike-color"></i>Like</a>
+                                                    <a href="/like/dislike/{{ $post->id }}#post-{{ $post->id }}" class="m-lg-2 text-inverse-lighter "><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3 dislike-color"></i>Like</a>
                                                 @endif
-                                                <a href="javascript:;" class="m-lg-2 text-inverse-lighter show-comment"><i
-                                                        class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+                                            <!--like end-->
+                                                <a  class="m-lg-2 text-inverse-lighter show-comment"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
                                             </div>
 
                                             <div class="add-comment-group">
                                                 <div class="timeline-comment-box">
                                                     <div class="comments">
+                                                     <!--Comment Start-->
                                                         @foreach($post->comments as $key)
-
                                                             <div class="item-comment">
-
                                                                 <div class="image-avatar">
                                                                     <a href="/profiles/student/{{$key['user']['id']}}">
                                                                         <h6>{{ $key->user->name }} {{$key->user->surname}}</h6>
@@ -116,26 +114,26 @@
                                                                     </div>
                                                                     <div class="row">
                                                                         @foreach(json_decode($key->images) as $key)
-                                                                            <img style="width: 150px"
-                                                                                 src="{{ asset($key) }}" alt="">
+                                                                            <img style="width: 150px" src="{{ asset($key) }}" alt="">
                                                                         @endforeach
                                                                     </div>
                                                                     @if(Auth::id()==$key['user_id'])
                                                                         <div class="delete-comment-parent">
-                                                                            <a href="/student/delete/comment/{{$key->id}}"><i
-                                                                                    class="fa fa-trash"></i></a>
+                                                                            <a href="/student/delete/comment/{{$key->id}}"><i class="fa fa-trash"></i></a>
                                                                         </div>
                                                                     @endif
                                                                 </div>
                                                             </div>
                                                         @endforeach
                                                     </div>
+                                                    <!--Comment end-->
+
                                                     <div class="input">
                                                         <form action="/student/comment/add/{{ $post->id }}"
                                                               enctype="multipart/form-data" method="POST">
                                                             @csrf
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control rounded-corner"
+                                                                <input type="text" class="form-control rounded-corner comment-input"
                                                                        name="comment" placeholder="Write a comment...">
                                                                 <div class="comment-file">
                                                                     <i class="fa fa-file" aria-hidden="true">

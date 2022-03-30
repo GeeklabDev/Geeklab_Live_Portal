@@ -3,7 +3,7 @@
         @csrf
         <div class="form-group mt-3">
             <label for="">Group Name</label>
-            <input class="form-control" type="text" wire:model="content" >
+            <input class="form-control" type="text" wire:model="content">
         </div>
         <div class="form-group mt-3">
             <button class="btn btn-success">Submit</button>
@@ -39,20 +39,18 @@
                                     <!-- begin timeline-body -->
                                     <div class="timeline-body">
                                         <div class="timeline-header">
-                                                    <span class="userimage"><img src="{{asset($post->user['avatar'])}}"
-                                                                                 alt=""></span>
-                                            <span class="username"><a
-                                                    href="{{ asset('profiles/student/'.$post->user->id)}}">{{ $post->user->name}} {{$post->user->surname}}</a> <small></small></span>
+                                                    <span class="userimage"><img src="{{asset($post->user['avatar'])}}" alt=""></span>
+                                            <span class="username"><a href="{{ asset('profiles/student/'.$post->user->id)}}">{{ $post->user->name}} {{$post->user->surname}}</a> <small></small></span>
                                         </div>
                                         <div class="timeline-content">
                                             <p class="post-content">
                                                 {{ $post->content }}
                                             </p>
                                             <div class="row">
-{{--                                                @foreach(json_decode($post->images) as $key)--}}
-{{--                                                    <img data-lightbox="roadtrip" class="post-img"--}}
-{{--                                                         src="{{ asset($key) }}" alt="">--}}
-{{--                                                @endforeach--}}
+                                                {{--                                                @foreach(json_decode($post->images) as $key)--}}
+                                                {{--                                                    <img data-lightbox="roadtrip" class="post-img"--}}
+                                                {{--                                                         src="{{ asset($key) }}" alt="">--}}
+                                                {{--                                                @endforeach--}}
                                             </div>
                                         </div>
                                         <div class="timeline-likes">
@@ -100,10 +98,10 @@
                                                                     <p>  {{ $key->comment }}</p>
                                                                 </div>
                                                                 <div class="row">
-{{--                                                                    @foreach(json_decode($key->images) as $key)--}}
-{{--                                                                        <img style="width: 150px"--}}
-{{--                                                                             src="{{ asset($key) }}" alt="">--}}
-{{--                                                                    @endforeach--}}
+                                                                    {{--                                                                    @foreach(json_decode($key->images) as $key)--}}
+                                                                    {{--                                                                        <img style="width: 150px"--}}
+                                                                    {{--                                                                             src="{{ asset($key) }}" alt="">--}}
+                                                                    {{--                                                                    @endforeach--}}
                                                                 </div>
                                                                 @if(Auth::id()==$key['user_id'])
                                                                     <div class="delete-comment-parent">
