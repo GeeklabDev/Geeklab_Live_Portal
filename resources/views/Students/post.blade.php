@@ -48,10 +48,16 @@
                                         <!-- begin timeline-body -->
                                         <div class="timeline-body">
                                             <div class="timeline-header">
-                                                <span class="userimage"><img src="{{asset($post->user['avatar'])}}"
-                                                                             alt=""></span>
-                                                <span class="username"><a
-                                                        href="{{ asset('profiles/student/'.$post->user->id)}}">{{ $post->user->name}} {{$post->user->surname}}</a> <small></small></span>
+                                                <div class="avatar-image">
+                                                    @if(\Illuminate\Support\Facades\Auth::user()['avatar']=='')
+                                                        <img
+                                                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                                                    @else
+                                                        <img src="{{asset(Auth::user()->avatar)}}">
+                                                    @endif
+
+                                                </div>
+                                                <span class="username"><a href="{{ asset('profiles/student/'.$post->user->id)}}">{{ $post->user->name}} {{$post->user->surname}}</a> <small></small></span>
                                             </div>
                                             <div class="timeline-content">
                                                 <p class="post-content">
@@ -85,10 +91,10 @@
                                                             class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
                                                 @else
                                                     <a href="/like/dislike/{{ $post->id }}#post-{{ $post->id }}"
-                                                       class="m-lg-2 text-inverse-lighter"><i
-                                                            class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Dislike</a>
+                                                       class="m-lg-2 text-inverse-lighter "><i
+                                                            class="fa fa-thumbs-up fa-fw fa-lg m-r-3 dislike-color"></i>Like</a>
                                                 @endif
-                                                <a href="javascript:;" class="m-lg-2 text-inverse-lighter"><i
+                                                <a href="javascript:;" class="m-lg-2 text-inverse-lighter show-comment"><i
                                                         class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
                                             </div>
 

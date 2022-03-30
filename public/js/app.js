@@ -12,9 +12,9 @@ $('.background-zoom').click(function (){
 })
 
 
-$('.text-inverse-lighter').click(function (){
+$('.show-comment').click(function (){
 
     $('.add-comment-group').fadeIn()
 
-})
+});
 

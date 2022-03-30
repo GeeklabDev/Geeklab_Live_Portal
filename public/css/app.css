@@ -1026,3 +1026,11 @@ select.form-control:not([size]):not([multiple]) {
 .modal-body{
     color: black;
 }
+.dislike-color{
+    color: rgba(0, 63, 232, 0.86);
+}
+.avatar-image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
