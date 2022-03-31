@@ -51,18 +51,12 @@
                             <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" name="country" placeholder="country" value="{{Auth::user()->country}}"></div>
                             <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" name="state" value="{{Auth::user()->state}}" placeholder="state"></div>
                         </div>
+
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                        <div class="mt-5 text-center"> <a href="/delete/picture/"><button class="btn btn-danger" type="button">Delete Profile picture</button></a></div>
                     </div>
                 </div>
             </div>
-        </form>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <form action="/delete/picture/{{Auth::id()}}" method="GET">
-            <button class="btn btn-danger">Delete Profile picture</button>
         </form>
 
 

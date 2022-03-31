@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class ProfileController extends Controller
 {
@@ -106,15 +108,16 @@ class ProfileController extends Controller
         return redirect('/profiles/student/' . $id);
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
-    {
-
+    public function destroy(){
+        User::where('id',Auth::id())->update(['avatar'=>'']);
+        return redirect()->back();
 
     }
 }

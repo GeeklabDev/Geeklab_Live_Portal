@@ -51,16 +51,16 @@ Route::middleware('auth')->group(function(){
         Route::post('/comment/add/{id}','student\CommentController@store');
         Route::get('/delete/comment/{id}','student\CommentController@destroy');
 
-
-
     });
     Route::prefix('profiles')->group(function(){
         Route::get('/student/{id}','ProfileController@show');
         Route::get('/edit/','ProfileController@index');
-        Route::post('/delete/picture/{id}','ProfileController@destroy');
         Route::post('/update/{id}','ProfileController@update');
 
+
     });
+    Route::get('/delete/picture/','ProfileController@destroy');
+
     Route::prefix('user')->group(function(){
         Route::get('/edit/{id}','ProfileController@edit');
         Route::get('/groups','UserGroupsController@index');

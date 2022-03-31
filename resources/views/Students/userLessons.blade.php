@@ -6,7 +6,7 @@
         <h1>Lessons</h1>
              @foreach($lessons as $key)
                  <h1>{{ $key->title }}</h1>
-                 <div>{!! $key->content !!}</div>
+                 <div class="content-lesson">{!! $key->content !!}</div>
              @endforeach
             <div class="pagination">
                 {{ $lessons->links() }}

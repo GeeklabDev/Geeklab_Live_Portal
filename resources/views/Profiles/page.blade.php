@@ -131,7 +131,7 @@
                                     <div class="timeline-footer">
                                                 <!--like start-->
                                                 @if($post->check_like()==0)
-                                                    <a href="/like/add/{{ $post->id }}#post-{{ $post->id }}" class="m-lg-2 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+                                                    <a href="/like/add/{{ $post->id }}#post-{{ $post->id }}" class="m-lg-2 "><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
                                                 @else
                                                     <a href="/like/dislike/{{ $post->id }}#post-{{ $post->id }}" class="m-lg-2 text-inverse-lighter "><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3 dislike-color"></i>Like</a>
                                             @endif
@@ -172,7 +172,7 @@
                                                     <form action="/student/comment/add/{{ $post->id }}" enctype="multipart/form-data" method="POST">
                                                         @csrf
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control rounded-corner comment-input" placeholder="Write a comment..." name="comment">
+                                                            <input class="form-control rounded-corner comment-input" placeholder="Write a comment..." name="comment">
                                                             <div class="comment-file">
                                                                 <i class="fa fa-file" aria-hidden="true">
                                                                     <input type="file" multiple name="files[]" class="choose-photo">

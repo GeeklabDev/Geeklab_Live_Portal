@@ -48,7 +48,7 @@ class UserLessonsController extends Controller
      */
     public function show($id)
     {
-        $lessons = Lesson::where('group_id',$id)->orderBy('id','desc')->paginate(1);
+        $lessons = Lesson::where('group_id',$id)->orderBy('id','desc')->simplePaginate(1);
         return view('Students/userLessons',compact('lessons'));
     }
 
