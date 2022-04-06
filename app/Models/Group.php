@@ -13,4 +13,12 @@ class Group extends Model
     {
         return $this->hasMany('App\Models\Lesson');
     }
+    function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+    function users(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany('App\Models\GroupUsers');
+    }
 }

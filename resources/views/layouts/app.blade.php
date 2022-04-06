@@ -47,8 +47,11 @@
                                <a href="{{asset('group')}}" class="nav_link {{ (request()->is('group')) ? 'active' : '' }}"> <i class='bx bxs-group' ></i> <span class="nav_name">Groups</span> </a>
                                <a href="{{asset('lesson')}}" class="nav_link {{ (request()->is('lesson')) ? 'active' : '' }}"> <i class='bx bxs-book' ></i> <span class="nav_name">Lessons</span> </a>
                                <a href="{{asset('groupUsers')}}" class="nav_link {{ (request()->is('groupUsers')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Add Student</span> </a>
-                               <a href="{{asset('profiles/student/'.Auth::id())}}" class="nav_link {{ (request()->is('profiles/student/')) ? 'active' : '' }}"> <i class='bx bx-user' ></i> <span class="nav_name">Profile</span> </a>
+                               <a href="{{asset('users')}}" class="nav_link {{ (request()->is('users')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Users</span> </a>
+                               <a href="{{asset('homeworks')}}" class="nav_link {{ (request()->is('homeworks')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Homeworks</span> </a>
+                               <a href="{{asset('employment')}}" class="nav_link {{ (request()->is('employment')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Employment</span> </a>
                                @endteacher
+                               <a href="{{asset('profiles/student/'.Auth::id())}}" class="nav_link {{ (request()->is('profiles/student/')) ? 'active' : '' }}"> <i class='bx bx-user' ></i> <span class="nav_name">Profile</span> </a>
                                <a href="{{asset('user/groups')}}" class="nav_link {{ (request()->is('user/groups')) ? 'active' : '' }}"> <i class='bx bx-book-open' ></i> <span class="nav_name">My Lessons</span> </a>
 
                        @endguest
@@ -78,5 +81,4 @@
     </div>
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/lightbox-plus-jquery.min.js') }}"></script>
 </html>

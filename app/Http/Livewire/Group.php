@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\GroupUsers;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -14,6 +15,8 @@ class Group extends Component
     public function render()
     {
         $group = \App\Models\Group::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
+        $groupUsers = GroupUsers::with(['group','user'])->orderBy('id','desc')->get();
+
         return view('livewire.group')->with('group', $group);
     }
     function save(){

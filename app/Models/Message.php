@@ -5,13 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Homework extends Model
+class Message extends Model
 {
     use HasFactory;
-
-    protected $table='homeworks';
-
-    function lesson(){
-        return $this->belongsTo('App\Models\Lesson');
-    }
 }

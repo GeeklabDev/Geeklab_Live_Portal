@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function(){
         Route::post('update/{id}','LessonController@update');
         Route::get('search/{id}','LessonController@search');
     });
+    Route::get('homeworks','HomeworkController@index');
+    Route::post('update/rating/{id}','HomeworkController@rating');
+
     Route::prefix('groupUsers')->middleware('auth.teacher')->group(function(){
         Route::get('','GroupUserController@index');
         Route::post('add','GroupUserController@store');
@@ -72,6 +75,11 @@ Route::middleware('auth')->group(function(){
         Route::get('/add/{id}','LikeController@add');
         Route::get('/dislike/{id}','LikeController@dislike');
     });
+    Route::get('users', 'teacher\UserController@index');
+    Route::post('/send/message/{id}', 'NotificationController@store');
+    Route::get('/make/teacher/{id}', 'teacherController@makeTeacher');
+    Route::get('employment', 'EmploymentController@index');
+    Route::get('chat', 'ChatController@index');
 
 
 

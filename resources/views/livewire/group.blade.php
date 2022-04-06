@@ -41,7 +41,7 @@
 {{--        @endforeach--}}
 {{--    </table>--}}
 
-    <div class="card p-10  mt-5">
+    <div class="card p-10  mt-5" wire:pull>
         <h1>Groups</h1>
         <div class="groups-flex row dark">
           @foreach($group as $key)

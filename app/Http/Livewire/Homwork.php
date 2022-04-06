@@ -14,7 +14,8 @@ class Homwork extends Component
     public $ids;
     public function render()
     {
-        return view('livewire.homwork');
+        $homeworks = Homework::where('user_id', Auth::id())->where('lesson_id', $this->ids)->get();
+        return view('livewire.homwork')->with('homeworks', $homeworks);
     }
     public function add_homework(){
         $path = $this->homework->store('homeworks');
@@ -23,6 +24,8 @@ class Homwork extends Component
         $homework->user_id = Auth::id();
         $homework->lesson_id = $this->ids;
         $homework->homework = $path;
+        $homework->message = '';
+        $homework->rating = 0;
         $homework->save();
     }
 }
