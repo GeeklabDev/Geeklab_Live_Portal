@@ -1,4 +1,4 @@
-<div class="container" wire:poll>
+<div class="container" wire:pull>
     <h1>{{ now() }}</h1>
     <div class="row clearfix mt-5">
         <div class="col-lg-12 mt-5">
@@ -46,38 +46,136 @@
                         </div>
                     </div>
                     <div class="chat-history">
-                        <ul class="m-b-0" wire:poll>
+                        <ul class="m-b-0" id="messages-for-audio">
                             @foreach($messages as $key)
                                 @if($key->from_id == Auth::id())
                                     <li class="clearfix">
                                         <div class="message other-message float-right">
                                             {{ $key->message }}
+                                            @if($key->audio!=null)
+                                            <audio controls>
+                                                <source src="${jsonResponse}">
+                                            </audio>
+                                            @endif
                                         </div>
                                     </li>
                                 @else
                                     <li class="clearfix">
                                         <div class="message my-message">
                                             {{ $key->message }}
+                                            @if($key->audio!=null)
+                                                <audio controls>
+                                                    <source src="${jsonResponse}">
+                                                </audio>
+                                            @endif
                                         </div>
                                     </li>
                                 @endif
                             @endforeach
                         </ul>
                     </div>
-                    <div class="chat-message clearfix">
-                        <form wire:submit.prevent="send">
+                    <div class="chat-message clearfix d-flex align-items-center">
+                        <form wire:submit.prevent="send" class="d-flex align-items-center">
                             <div class="form-group mt-3">
-                                <label for="">Message</label>
                                 <input class="form-control" required type="text" wire:model.defer="message">
                             </div>
                             <div class="form-group mt-3">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </form>
-
+                        <div id="controls" class="d-flex align-items-center">
+                            <button id="recordButton" class="btn btn-info mt-3 mx-2" type="button">
+                                <i class="fa fa-microphone"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script >
+    //webkitURL is deprecated but nevertheless
+    URL = window.URL || window.webkitURL;
+
+    var gumStream;                      //stream from getUserMedia()
+    var rec;                            //Recorder.js object
+    var input;                          //MediaStreamAudioSourceNode we'll be recording
+
+    // shim for AudioContext when it's not avb.
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    var audioContext //audio context to help us record
+
+    var recordButton = document.getElementById("recordButton");
+    var stopButton = document.getElementById("stopButton");
+    var pauseButton = document.getElementById("pauseButton");
+
+    //add events to those 2 buttons
+    recordButton.addEventListener("mousedown", startRecording);
+    recordButton.addEventListener("mouseup", stopRecording);
+
+    function startRecording() {
+        console.log("recordButton clicked");
+        var constraints = { audio: true, video:false }
+        navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+            console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
+            audioContext = new AudioContext();
+            gumStream = stream;
+            input = audioContext.createMediaStreamSource(stream);
+            rec = new Recorder(input,{numChannels:1})
+            rec.record()
+        }).catch(function(err) {
+            //enable the record button if getUserMedia() fails
+        });
+    }
+
+    function pauseRecording(){
+        console.log("pauseButton clicked rec.recording=",rec.recording );
+        if (rec.recording){
+            //pause
+            rec.stop();
+            pauseButton.innerHTML="Resume";
+        }else{
+            //resume
+            rec.record()
+            pauseButton.innerHTML="Pause";
+
+        }
+    }
+
+    function stopRecording() {
+        rec.stop();
+        gumStream.getAudioTracks()[0].stop();
+        rec.exportWAV(createDownloadLink);
+    }
+
+    function createDownloadLink(blob) {
+        var filename = new Date().toISOString();
+
+        var xhr=new XMLHttpRequest();
+        var fd=new FormData();
+        fd.append("audio_data",blob, filename);
+        fd.append("_token", '{{ csrf_token() }}');
+        fd.append("group_id", '{{ $group_id }}');
+        xhr.open("POST","recorder",true);
+        xhr.onload=function() {
+            let jsonResponse = xhr.response;
+            $('#messages-for-audio').append(`
+                <li class="clearfix">
+                    <div class="message other-message float-right">
+                         <audio controls>
+                            <source src="${jsonResponse}">
+                         </audio>
+                    </div>
+                </li>
+
+            `)
+        };
+        xhr.send(fd);
+
+
+    }
+</script>

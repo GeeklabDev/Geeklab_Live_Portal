@@ -1,0 +1,11 @@
+.navbar-brand h1 {
+    color: white;
+}
+
+.faq-page .img-fluid {
+    max-width: 100%;
+    height: 480px;
+}
+.other-features-slider>div img{
+    margin: 0px auto 10px auto;
+}

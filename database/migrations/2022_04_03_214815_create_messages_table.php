@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->bigInteger('group_id');
             $table->bigInteger('from_id');
             $table->text('message');
+            $table->text('audio')->nullable();
             $table->timestamps();
         });
     }

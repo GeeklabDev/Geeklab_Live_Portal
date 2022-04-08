@@ -1345,7 +1345,9 @@ select.form-control:not([size]):not([multiple]) {
 
 .chat .chat-history {
     padding: 20px;
-    border-bottom: 2px solid #fff
+    border-bottom: 2px solid #fff;
+    max-height: 600px;
+    overflow-y: scroll;
 }
 
 .chat .chat-history ul {
@@ -1519,7 +1521,9 @@ select.form-control:not([size]):not([multiple]) {
 /*chat*/
 
 
-
+#recordButton:active{
+    background: green;
+}
 
 
 
