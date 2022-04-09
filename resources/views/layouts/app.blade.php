@@ -28,31 +28,31 @@
        </header>
        <div class="l-navbar" id="nav-bar">
            <nav class="nav">
-               <div><a href="/home" class="nav_logo"> <i class="fa fa-home" style="font-size:24px"></i><span class="nav_logo-name">Home</span>
+               <div><a href="/home" class="nav_logo"> <i class="fa fa-home" style="font-size:24px"></i><span class="nav_logo-name">Գլխավոր</span>
                    </a>
                    <div class="nav_list">
                        <ul class="navbar-nav ms-auto">
                            <!-- Authentication Links -->
                            @guest
                                @if (Route::has('login'))
-                                       <a href="{{ route('login') }}" class="nav_link active"> <i class='bx bx-log-in'></i> <span class="nav_name">Login</span> </a>
+                                       <a href="{{ route('login') }}" class="nav_link active"> <i class='bx bx-log-in'></i> <span class="nav_name">Մուտք</span> </a>
                                @endif
 
                                @if (Route::has('register'))
-                                       <a href="{{ route('register') }}" class="nav_link active"> <i class='bx bxs-registered'></i> <span class="nav_name">Register</span> </a>
+                                       <a href="{{ route('register') }}" class="nav_link active"> <i class='bx bxs-registered'></i> <span class="nav_name">Գրանցվել</span> </a>
                                @endif
                            @else
+                               <a href="{{asset('student/posts')}}" class="nav_link {{ (request()->is('student/posts')) ? 'active' : '' }}"> <i class='bx bx-street-view' ></i> <span class="nav_name">Պոստեր</span> </a>
                                @teacher
-                               <a href="{{asset('student/posts')}}" class="nav_link {{ (request()->is('student/posts')) ? 'active' : '' }}"> <i class='bx bx-street-view' ></i> <span class="nav_name">Posts</span> </a>
-                               <a href="{{asset('group')}}" class="nav_link {{ (request()->is('group')) ? 'active' : '' }}"> <i class='bx bxs-group' ></i> <span class="nav_name">Groups</span> </a>
-                               <a href="{{asset('lesson')}}" class="nav_link {{ (request()->is('lesson')) ? 'active' : '' }}"> <i class='bx bxs-book' ></i> <span class="nav_name">Lessons</span> </a>
-                               <a href="{{asset('groupUsers')}}" class="nav_link {{ (request()->is('groupUsers')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Add Student</span> </a>
-                               <a href="{{asset('users')}}" class="nav_link {{ (request()->is('users')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Users</span> </a>
-                               <a href="{{asset('homeworks')}}" class="nav_link {{ (request()->is('homeworks')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Homeworks</span> </a>
-                               <a href="{{asset('employment')}}" class="nav_link {{ (request()->is('employment')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Employment</span> </a>
+                               <a href="{{asset('group')}}" class="nav_link {{ (request()->is('group')) ? 'active' : '' }}"> <i class='bx bxs-group' ></i> <span class="nav_name">Խմբեր</span> </a>
+                               <a href="{{asset('lesson')}}" class="nav_link {{ (request()->is('lesson')) ? 'active' : '' }}"> <i class='bx bxs-book' ></i> <span class="nav_name">Դասընթացներ</span> </a>
+                               <a href="{{asset('groupUsers')}}" class="nav_link {{ (request()->is('groupUsers')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Ավելացնել ուսանող</span> </a>
+                               <a href="{{asset('users')}}" class="nav_link {{ (request()->is('users')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Ուսանողները</span> </a>
+                               <a href="{{asset('homeworks')}}" class="nav_link {{ (request()->is('homeworks')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Տնային աշխատանքներ</span> </a>
+                               <a href="{{asset('employment')}}" class="nav_link {{ (request()->is('employment')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Պլանավորում</span> </a>
                                @endteacher
-                               <a href="{{asset('profiles/student/'.Auth::id())}}" class="nav_link {{ (request()->is('profiles/student/')) ? 'active' : '' }}"> <i class='bx bx-user' ></i> <span class="nav_name">Profile</span> </a>
-                               <a href="{{asset('user/groups')}}" class="nav_link {{ (request()->is('user/groups')) ? 'active' : '' }}"> <i class='bx bx-book-open' ></i> <span class="nav_name">My Lessons</span> </a>
+                               <a href="{{asset('profiles/student/'.Auth::id())}}" class="nav_link {{ (request()->is('profiles/student/')) ? 'active' : '' }}"> <i class='bx bx-user' ></i> <span class="nav_name">Պրոֆիլի էջ</span> </a>
+                               <a href="{{asset('user/groups')}}" class="nav_link {{ (request()->is('user/groups')) ? 'active' : '' }}"> <i class='bx bx-book-open' ></i> <span class="nav_name">Իմ խմբերը</span> </a>
 
                        @endguest
 

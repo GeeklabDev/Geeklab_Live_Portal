@@ -54,7 +54,7 @@
 
                                             <div class="stats-right">
                                                 <span
-                                                    class="stats-text">{{ $post->number_of_comments() }} Comments</span>
+                                                    class="stats-text">{{ $post->number_of_comments() }} Մեկնաբանություններ</span>
                                             </div>
 
                                             <div class="stats">
@@ -70,15 +70,15 @@
                                             @if($post->check_like()==0)
                                                 <a href="#" wire:click="like({{ $post->id }})"
                                                    class="m-lg-2 text-inverse-lighter"><i
-                                                        class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+                                                        class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Հավանել</a>
                                             @else
                                                 <a href="#" wire:click="dislike({{ $post->id }})"
                                                    class="m-lg-2 text-inverse-lighter "><i
-                                                        class="fa fa-thumbs-up fa-fw fa-lg m-r-3 dislike-color"></i>Like</a>
+                                                        class="fa fa-thumbs-up fa-fw fa-lg m-r-3 dislike-color"></i>Հավանությունը հանել</a>
                                         @endif
                                         <!--like end-->
                                             <a class="m-lg-2 text-inverse-lighter show-comment"><i
-                                                    class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+                                                    class="fa fa-comments fa-fw fa-lg m-r-3"></i> Մեկնաբանություններ</a>
                                         </div>
 
                                         <div class="add-comment-group">

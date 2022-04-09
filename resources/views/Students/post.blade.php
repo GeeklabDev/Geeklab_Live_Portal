@@ -15,7 +15,7 @@
 
 
                 <div class="form-group mt-3">
-                    <button class="btn btn-primary">Post</button>
+                    <button class="btn btn-primary">Տեղադրել</button>
                 </div>
             </div>
 

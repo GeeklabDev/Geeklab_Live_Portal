@@ -54,7 +54,7 @@
                                             {{ $key->message }}
                                             @if($key->audio!=null)
                                             <audio controls>
-                                                <source src="${jsonResponse}">
+                                                <source src="{{ $key->audio }}">
                                             </audio>
                                             @endif
                                         </div>
@@ -65,7 +65,7 @@
                                             {{ $key->message }}
                                             @if($key->audio!=null)
                                                 <audio controls>
-                                                    <source src="${jsonResponse}">
+                                                    <source src="{{ $key->audio }}">
                                                 </audio>
                                             @endif
                                         </div>
@@ -118,10 +118,8 @@
     recordButton.addEventListener("mouseup", stopRecording);
 
     function startRecording() {
-        console.log("recordButton clicked");
         var constraints = { audio: true, video:false }
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-            console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
             audioContext = new AudioContext();
             gumStream = stream;
             input = audioContext.createMediaStreamSource(stream);
@@ -132,20 +130,6 @@
         });
     }
 
-    function pauseRecording(){
-        console.log("pauseButton clicked rec.recording=",rec.recording );
-        if (rec.recording){
-            //pause
-            rec.stop();
-            pauseButton.innerHTML="Resume";
-        }else{
-            //resume
-            rec.record()
-            pauseButton.innerHTML="Pause";
-
-        }
-    }
-
     function stopRecording() {
         rec.stop();
         gumStream.getAudioTracks()[0].stop();
@@ -154,13 +138,14 @@
 
     function createDownloadLink(blob) {
         var filename = new Date().toISOString();
-
+        console.log('ok')
         var xhr=new XMLHttpRequest();
         var fd=new FormData();
         fd.append("audio_data",blob, filename);
         fd.append("_token", '{{ csrf_token() }}');
         fd.append("group_id", '{{ $group_id }}');
         xhr.open("POST","recorder",true);
+
         xhr.onload=function() {
             let jsonResponse = xhr.response;
             $('#messages-for-audio').append(`
@@ -171,7 +156,6 @@
                          </audio>
                     </div>
                 </li>
-
             `)
         };
         xhr.send(fd);

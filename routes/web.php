@@ -14,13 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes();
 
-
+Route::get("clearCache", function(){
+    return  \Artisan::call('route:clear');
+});
 Route::post('recorder', 'AudioController@recorder');
+
+//zoom
+    Route::get('meetings/show/{id}', 'zoom/MeetingController@show');
+    Route::get('meetings/destroy/{id}', 'zoom/MeetingController@destroy');
+    Route::post('meetings/store', 'zoom/MeetingController@store');
+    Route::get('meetings/update', 'zoom/MeetingController@update');
+
+
+//zoom
 
 
 Route::middleware('auth')->group(function(){

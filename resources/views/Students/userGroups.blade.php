@@ -3,7 +3,7 @@
 
     <div class="container">
         <div class="card p-10  mt-5">
-            <h1>My Groups</h1>
+            <h2>Իմ խմբերը</h2>
             <div class="groups-flex row dark">
                 @foreach($groups as $key)
                     <a href="/user/lessons/{{ $key['group']["id"] }}">

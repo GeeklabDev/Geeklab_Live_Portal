@@ -17,7 +17,7 @@ class CheckTeacherUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()['teacher']!==1){
+        if (Auth::user()['teacher']!=1){
             return $next($request);
         }else{
             return redirect('/student/posts');
