@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container rounded bg-white mt-5 mb-5">
-        <form action="/profiles/update/{{ Auth::id()}}" method="POST" enctype="multipart/form-data">
+        <form action="/teacher/profiles/update/{{ Auth::id()}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
 

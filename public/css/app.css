@@ -1533,5 +1533,14 @@ select.form-control:not([size]):not([multiple]) {
 
 
 
+.last-header .nav::-webkit-scrollbar {
+    background: #4723d9;
+}
 
-
+.last-header .l-navbar{
+    padding: 0;
+}
+.last-header .nav{
+    overflow: hidden;
+    overflow-y: scroll;
+}

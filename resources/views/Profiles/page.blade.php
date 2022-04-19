@@ -32,7 +32,7 @@
                                     <h4 class="m-t-10 m-b-5">{{$user['name']}} {{$user['surname']}}</h4>
                                     <p class="m-b-10">Laravel yevs</p>
                                     @if($user->id==\Illuminate\Support\Facades\Auth::id())
-                                        <a href="/profiles/edit/" class="btn btn-sm btn-info mb-2">Edit Profile</a>
+                                        <a href="/teacher/profiles/edit/" class="btn btn-sm btn-info mb-2">Edit Profile</a>
 
                                     @endif
                                 </div>
