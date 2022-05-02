@@ -2,23 +2,20 @@
 @section('content')
 
     <div class="container">
-        <div class="card p-10  mt-5">
-            <h2>Իմ խմբերը</h2>
-            <div class="groups-flex row dark">
+            <div class="cards-dashboard">
                 @foreach($groups as $key)
-                    <a href="/user/lessons/{{ $key['group']["id"] }}">
-                    <div class="col-12 col-sm-6 col-md-6 mt-5 d-flex align-items-center mb-2 item-group">
-                        <img src="https://banner2.cleanpng.com/20180717/cek/kisspng-computer-icons-desktop-wallpaper-team-concept-5b4e0cd3819810.4507019915318417475308.jpg" alt="">
-                        <div>
-                            <h4>{{ $key['group']['name'] }}</h4>
+
+                        <div class="card-dashboard">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <a href="/user/lessons/{{ $key['group']["id"] }}"><h3>{{ $key['group']['name'] }}</h3> </a>
+                            <a href="/student/syllabus/{{ $key['group']["id"] }}">
+                                <h6>Ուս․ ծրագիր</h6>
+                            </a>
                         </div>
-                    </div>
-                    </a>
+
                 @endforeach
             </div>
         </div>
-    </div>
-    </div>
 
 
     @endsection

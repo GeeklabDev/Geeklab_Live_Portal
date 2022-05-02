@@ -44,13 +44,9 @@
                            @else
                                <a href="{{route('posts')}}" class="nav_link {{ (request()->is('student/posts')) ? 'active' : '' }}"> <i class='bx bx-street-view' ></i> <span class="nav_name">Պոստեր</span> </a>
                                @teacher
-                               <a href="{{ route('group') }}" class="nav_link {{ (request()->is('group')) ? 'active' : '' }}"> <i class='bx bxs-group' ></i> <span class="nav_name">Խմբեր</span> </a>
-                               <a href="{{route('lesson')}}" class="nav_link {{ (request()->is('lesson')) ? 'active' : '' }}"> <i class='bx bxs-book' ></i> <span class="nav_name">Դասընթացներ</span> </a>
-                               <a href="{{route('groupUsers')}}" class="nav_link {{ (request()->is('groupUsers')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Ավելացնել ուսանող</span> </a>
-                               <a href="{{route('users')}}" class="nav_link {{ (request()->is('users')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Ուսանողները</span> </a>
-                               <a href="{{route('homeworks')}}" class="nav_link {{ (request()->is('homeworks')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Տնային աշխատանքներ</span> </a>
+                               <a href="/teacher/dashboard/student" class="nav_link {{ (request()->is('student/posts')) ? 'active' : '' }}"> <i class='bx bx-street-view' ></i> <span class="nav_name">Ուսանողի մաս</span> </a>
                                <a href="{{route('employment')}}" class="nav_link {{ (request()->is('employment')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Պլանավորում</span> </a>
-                               <a href="{{route('books')}}" class="nav_link {{ (request()->is('employment')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Library</span> </a>
+                               <a href="{{route('books')}}" class="nav_link {{ (request()->is('employment')) ? 'active' : '' }}"> <i class='bx bx-user-plus' ></i> <span class="nav_name">Գրադարան</span> </a>
                                @endteacher
                                <a href="{{asset('/teacher/profiles/student/'.Auth::id())}}" class="nav_link {{ (request()->is('profiles/student/')) ? 'active' : '' }}"> <i class='bx bx-user' ></i> <span class="nav_name">Պրոֆիլի էջ</span> </a>
                                <a href="{{asset('user/groups')}}" class="nav_link {{ (request()->is('user/groups')) ? 'active' : '' }}"> <i class='bx bx-book-open' ></i> <span class="nav_name">Իմ խմբերը</span> </a>

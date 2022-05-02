@@ -1544,3 +1544,34 @@ select.form-control:not([size]):not([multiple]) {
     overflow: hidden;
     overflow-y: scroll;
 }
+.cards-dashboard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.card-dashboard{
+    width: 200px;
+    height: 200px;
+    background: #0c5460;
+    border-radius: 2px;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+
+}
+.card-dashboard i{
+    font-size: 50px;
+}
+.card-dashboard h3{
+    font-size: 20px;
+    margin-top: 30px;
+}
+.item-syllabus{
+    display: flex;
+    justify-content: space-between;
+}

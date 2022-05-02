@@ -18,7 +18,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get("storageLink", function(){
+    return  \Artisan::call('storage:link');
+});
 Route::get("clearCache", function(){
     return  \Artisan::call('route:clear');
 });
@@ -34,6 +36,8 @@ Route::post('recorder', 'AudioController@recorder');
 Route::middleware('auth')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::prefix('teacher')->middleware('auth.teacher')->group(function(){
+        Route::post('add/student/{id}', 'teacher\UserController@store');
+        Route::get('dashboard/student', 'teacher\DashboardStudentController@index');
         Route::get('/make/teacher/{id}', 'teacherController@makeTeacher');
         Route::get('employment', 'EmploymentController@index')->name('employment');
         Route::post('/send/message/{id}', 'NotificationController@store');
@@ -56,7 +60,6 @@ Route::middleware('auth')->group(function(){
         Route::get('homeworks','HomeworkController@index')->name('homeworks');
         Route::post('update/rating/{id}','HomeworkController@rating');
         Route::prefix('groupUsers')->middleware('auth.teacher')->group(function(){
-            Route::get('','GroupUserController@index')->name('groupUsers');
             Route::post('add','GroupUserController@store');
             Route::get('edit/{id}','GroupUserController@edit');
             Route::get('delete/{id}','GroupUserController@destroy');
@@ -71,6 +74,8 @@ Route::middleware('auth')->group(function(){
         Route::get('users', 'teacher\UserController@index')->name('users');
     });
     Route::prefix('student')->group(function(){
+        Route::get('/syllabus/{id}','student\SyllabusController@index');
+        Route::get('/lesson/{id}','student\SyllabusController@show');
         Route::get('/posts','student\PostController@index')->name('posts');
         Route::post('/posts/add','student\PostController@store');
         Route::post('/comment/add/{id}','student\CommentController@store');

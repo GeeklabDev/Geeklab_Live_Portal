@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\GroupUsers;
+use App\Models\Homework;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,6 +103,7 @@ class LessonController extends Controller
     public function destroy($id)
     {
         Lesson::where('id', $id)->delete();
+        Homework::where('lesson_id',$id)->delete();
         return redirect()->back();
     }
 

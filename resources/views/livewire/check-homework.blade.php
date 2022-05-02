@@ -4,11 +4,13 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Lesson title</th>
-                <th>GROUP NAME</th>
-                <th>Rating</th>
-                <th>Message</th>
-                <th>Rating open</th>
+                <th>Դասի անուն</th>
+                <th>Խմբի անուն</th>
+                <th>Տնայի աշխատանք</th>
+                <th>Ջնջել</th>
+                <th>Գնահատական</th>
+                <th>Նամակ</th>
+                <th>Գնահատելու պատուհան</th>
             </tr>
             </thead>
             <tbody  id="table">
@@ -18,6 +20,12 @@
                         <td>{{ $key->id }}</td>
                         <td>{{ $key['lesson']['title'] }}</td>
                         <td>{{ $key['lesson']['group']['name'] }}</td>
+                        <td>
+                            <span wire:click="downloadHomework('{{ $key->homework }}')"> Ներբեռնել </span>
+                        </td>
+                        <td>
+                            <span wire:click="deleteHomework('{{ $key->homework }}', {{ $key->id }})"> Ջնջել </span>
+                        </td>
                         <td>{{ $key['rating'] }}</td>
                         <td>{{ $key['message'] }}</td>
                         <td><button   data-bs-toggle="modal"  data-bs-target="#myModal-{{ $key->id }}"  class="btn btn-info">Open rating</button></td>
@@ -31,7 +39,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
 
-                                    <form action="/update/rating/{{ $key->id }}" method="POST">
+                                    <form action="/teacher/update/rating/{{ $key->id }}" method="POST">
                                         <!-- Modal body -->
                                         <div class="modal-body">
                                             <div class="form-group">

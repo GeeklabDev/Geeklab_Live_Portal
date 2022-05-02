@@ -1,86 +1,88 @@
-<div class="container">
-    <form wire:submit.prevent="save">
-        @csrf
-        <div class="form-group mt-3">
-            <label for="">Group Name</label>
-            <input class="form-control" required type="text" wire:model="name" >
-        </div>
-        <div class="form-group mt-3">
-            <button class="btn btn-success">Submit</button>
-        </div>
-
-    </form>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-
-{{--    <table class="table table-dark table-hover">--}}
-{{--        <tr>--}}
-{{--            <td>Name</td>--}}
-{{--            <td>DELETE</td>--}}
-{{--            <td>EDIT</td>--}}
-{{--        </tr>--}}
-{{--        @foreach($group as $key)--}}
-{{--            <tr>--}}
-{{--                <td>{{$key['name']}}</td>--}}
-{{--                <td>--}}
-{{--                   <button wire:click="delete({{ $key->id }})"  class="btn btn-danger">Delete</button>--}}
-{{--                </td>--}}
-{{--                <td>--}}
-{{--                    <button   data-bs-toggle="modal" data-bs-target="#myModal" wire:click="edit({{ $key->id }})"  class="btn btn-primary">Edit</button>--}}
-{{--                </td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
-{{--    </table>--}}
-
-    <div class="card p-10  mt-5" wire:pull>
-        <h1>Groups</h1>
-        <div class="groups-flex row dark">
-          @foreach($group as $key)
-            <div class="col-12 col-sm-6 col-md-6 mt-5 d-flex align-items-center mb-2 item-group">
-                <img src="https://banner2.cleanpng.com/20180717/cek/kisspng-computer-icons-desktop-wallpaper-team-concept-5b4e0cd3819810.4507019915318417475308.jpg" alt="">
-                <h4>{{ $key['name'] }}</h4>
-                <i wire:click="delete({{ $key->id }})"  class="fa fa-trash m-lg-2"></i>
+<div>
+        <form wire:submit.prevent="save">
+            @csrf
+            <div class="form-group mt-3">
+                <label for="">Խմբի անունը</label>
+                <input class="form-control" required type="text" wire:model="name" >
             </div>
-           @endforeach
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="modal" id="myModal" >
-        <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="form-group mt-3">
+                <button class="btn btn-info">Ավելացնել</button>
+            </div>
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+        </form>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="cards-dashboard mt-lg-4">
+            @foreach($groupsUsers as $key)
+                <div class="card-dashboard">
+                    <span wire:click="delete({{ $key->id }})" class="fa fa-trash" aria-hidden="true"></span>
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <h3>{{ $key['name'] }}
+                    </h3>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal"  data-bs-target="#myModal-{{ $key->id }}" >Խմբի ուսանողները</button>
+                    <div class="modal" id="myModal-{{ $key->id }}" >
+                        <div class="modal-dialog">
+                            <div class="modal-content">
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <input type="text"  wire:model="updatedName" class="form-control">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Ավելացնել ուսանող</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Surname</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        @foreach($key['users'] as $keys)
+                                            <tr>
+                                                <td>{{ $keys['user']['id'] }}</td>
+                                                <td>{{ $keys['user']['name'] }}</td>
+                                                <td>{{ $keys['user']['surname'] }}</td>
+                                                <td>{{ $keys['user']['phone'] }}</td>
+                                                <td>{{ $keys['user']['email'] }}</td>
+                                            </tr>
+                                        @endforeach
+                                        <tfooter class="mb-5">
+                                            <form method="POST" action="add/student/{{ $key->id }}">
+                                                @csrf
+                                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                                    <div class="w-75 h-100">
+                                                        <input type="text" placeholder="User email" class="form-control"  name="email" id="title">
+                                                    </div>
+                                                    <div class="w-25 h-100 form-group">
+                                                        <button class="w-100 btn btn-success">Ավելացնել</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </tfooter>
+                                    </table>
+
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" wire:click="update()" class="btn btn-success">Update</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" wire:click="update()" class="btn btn-success">Update</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-
-            </div>
+            @endforeach
         </div>
-    </div>
-
 </div>

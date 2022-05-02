@@ -9,7 +9,7 @@
         @foreach($homeworks as $key)
             <div class="mt-4">
                 <h4>
-                    <a download href="{{ asset("storage/".$key->homework) }}"> Ներբեռնել </a>
+                    <span wire:click="downloadHomework('{{ $key->homework }}')"> Ներբեռնել </span>
                     <span>(Գնահատականը՝ {{ $key->rating }})</span>
                 </h4>
             </div>

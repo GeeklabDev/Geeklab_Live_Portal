@@ -33,7 +33,9 @@
                                     <p class="m-b-10">Laravel yevs</p>
                                     @if($user->id==\Illuminate\Support\Facades\Auth::id())
                                         <a href="/teacher/profiles/edit/" class="btn btn-sm btn-info mb-2">Edit Profile</a>
-
+                                    @endif
+                                    @if($user->teacher==0)
+                                        <a href="/teacher/make/teacher/{{ $user->id }}" class="btn btn-sm btn-info mb-2">Teacher mode</a>
                                     @endif
                                 </div>
                                 <!-- END profile-header-info -->

@@ -14,10 +14,9 @@ class Group extends Component
 
     public function render()
     {
+        $groupsUsers = \App\Models\Group::with('user', 'users.user')->get();
         $group = \App\Models\Group::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
-        $groupUsers = GroupUsers::with(['group','user'])->orderBy('id','desc')->get();
-
-        return view('livewire.group')->with('group', $group);
+        return view('livewire.group')->with('group', $group)->with('groupsUsers', $groupsUsers);
     }
     function save(){
         $group = new \App\Models\Group();
